@@ -1,3 +1,8 @@
+:root {
+	--app-blue: #213951;
+	--app-green: #26af70;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -25,4 +30,9 @@ input {
 
 button {
 	cursor: pointer;
+	border: none;
+}
+
+a {
+	text-decoration: none;
 }
