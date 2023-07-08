@@ -3,13 +3,36 @@ import { AppContext } from '../../context/app-state';
 import { styled } from 'styled-components';
 
 import Spinner from '../spinner/spinner';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
-	const { isLoading, eventsList } = useContext(AppContext);
+	const { isLoading, eventsList, searchTerm } = useContext(AppContext);
 
-	const [events, setEvents] = useState(eventsList);
+	const [events, setEvents] = useState([]);
 
-	console.log('eventlist::', eventsList);
+	const handleEvents = () => {
+		console.log(eventsList);
+		setEvents(eventsList);
+	};
+
+	const handleSearch = () => {
+		setEvents((prev) =>
+			eventsList.filter((el) =>
+				el.$.Name.toLocaleLowerCase().includes(
+					searchTerm.toLocaleLowerCase()
+				)
+			)
+		);
+	};
+
+	useEffect(() => {
+		handleSearch();
+	}, [searchTerm]);
+
+	useEffect(() => {
+		handleEvents();
+	}, [eventsList]);
 
 	if (isLoading) {
 		return <Spinner />;
@@ -19,7 +42,11 @@ const Home = () => {
 		<HomeWrapper>
 			<div className='inner'>
 				{events.map((ev, idx) => (
-					<p key={idx}>{ev.$.Name}</p>
+					<p key={idx}>
+						{ev.$.Name}
+
+						<FontAwesomeIcon icon={faCaretDown} />
+					</p>
 				))}
 			</div>
 		</HomeWrapper>

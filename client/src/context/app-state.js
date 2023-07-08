@@ -5,6 +5,7 @@ const init = {
 	eventsList: [],
 	error: null,
 	isLoading: false,
+	searchTerm: '',
 };
 
 export const AppContext = createContext(init);
@@ -50,6 +51,7 @@ export const AppProvider = ({ children }) => {
 				isLoading: state.isLoading,
 				error: state.error,
 				eventsList: state.eventsList,
+				searchTerm: state.searchTerm,
 				dispatch,
 			}}
 		>

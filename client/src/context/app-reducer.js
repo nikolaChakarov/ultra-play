@@ -19,6 +19,11 @@ export default function appReducer(state, action) {
 				isLoading: false,
 				error: null,
 			};
+		case 'SEARCH_LEAGUE_NAME':
+			return {
+				...state,
+				searchTerm: action.payload,
+			};
 
 		default:
 			return state;

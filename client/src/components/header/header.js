@@ -1,9 +1,19 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AppContext } from '../../context/app-state';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 const Header = () => {
 	const [isAbout, setIsAbout] = useState(false);
+	const { dispatch } = useContext(AppContext);
+
+	const handleChange = (e) => {
+		dispatch({
+			type: 'SEARCH_LEAGUE_NAME',
+			payload: e.target.value,
+		});
+	};
+
 	return (
 		<HeaderWrapper>
 			<div className='header-action'>
@@ -12,8 +22,13 @@ const Header = () => {
 				</div>
 
 				{!isAbout && (
-					<div className='btn-wrapper'>
+					<div className='actions-wrapper'>
 						<button>Sort by</button>
+						<input
+							type='text'
+							placeholder='Search by League Name'
+							onChange={handleChange}
+						/>
 					</div>
 				)}
 			</div>
@@ -64,13 +79,16 @@ const HeaderWrapper = styled.header`
 			align-items: center;
 			justify-content: center;
 			gap: 2rem;
+			background: #fff;
 
 			.img-wrapper {
 				max-width: 5rem;
 			}
 
 			img {
-				filter: invert(100%);
+				filter: brightness(0) saturate(100%) invert(19%) sepia(6%)
+					saturate(3972%) hue-rotate(170deg) brightness(98%)
+					contrast(95%);
 				display: block;
 				width: 100%;
 			}
@@ -86,6 +104,20 @@ const HeaderWrapper = styled.header`
 				align-items: center;
 				justify-content: center;
 				line-height: 1.2rem;
+			}
+
+			.actions-wrapper {
+				display: flex;
+				gap: 0.5rem;
+
+				input {
+					border: 1px solid #fff;
+					border-radius: 0.5rem;
+					padding: 0.5rem;
+					color: #777;
+					box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.8);
+					font-size: 1.4rem;
+				}
 			}
 		}
 	}
