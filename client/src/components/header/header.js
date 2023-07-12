@@ -89,6 +89,7 @@ const HeaderWrapper = styled.header`
 			justify-content: center;
 			background: #fff;
 			gap: 0.5rem;
+			padding: 0 0.3rem;
 
 			.img-wrapper {
 				max-width: 5rem;
@@ -114,9 +115,11 @@ const HeaderWrapper = styled.header`
 				justify-content: center;
 				line-height: 1.2rem;
 				font-size: 1.2rem;
+				flex: 1;
 			}
 
 			.actions-wrapper {
+				flex: 1;
 				display: flex;
 				gap: 0.5rem;
 

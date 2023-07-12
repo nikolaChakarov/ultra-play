@@ -1,23 +1,31 @@
 import { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../../context/app-state';
 import { styled } from 'styled-components';
-import { sortMatches } from '../../utils/sortMatches';
+import {
+	sortMatchesByTime,
+	sortMatchesByLeague,
+} from '../../utils/sortMatches';
 
 import League from '../league/league';
 import Spinner from '../spinner/spinner';
 
 const Home = () => {
-	const { isLoading, eventsList, searchTerm } = useContext(AppContext);
+	const { isLoading, eventsList, searchTerm, sortType } =
+		useContext(AppContext);
 
 	const [events, setEvents] = useState([]);
 
 	const handleEvents = () => {
-		const sortedByTime = sortMatches(eventsList);
-		setEvents(sortedByTime);
+		const sorted =
+			sortType === 'time'
+				? sortMatchesByTime(eventsList)
+				: sortMatchesByLeague(eventsList);
+
+		setEvents(sorted);
 	};
 
 	const handleSearch = () => {
-		const sortAndFilter = sortMatches(
+		const sortAndFilter = sortMatchesByTime(
 			eventsList.filter((el) =>
 				el.$.Name.toLocaleLowerCase().includes(
 					searchTerm.toLocaleLowerCase()
@@ -34,7 +42,8 @@ const Home = () => {
 
 	useEffect(() => {
 		handleEvents();
-	}, [eventsList]);
+		console.log('effect');
+	}, [sortType, eventsList]);
 
 	if (isLoading) {
 		return <Spinner />;

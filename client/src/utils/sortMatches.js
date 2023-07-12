@@ -1,4 +1,4 @@
-export function sortMatches(arr) {
+export function sortMatchesByTime(arr) {
 	const init = JSON.parse(JSON.stringify(arr));
 	// 1. add league name to match info;
 	const allMatches = init
@@ -51,4 +51,10 @@ export function sortMatches(arr) {
 	}, []);
 
 	return res;
+}
+
+export function sortMatchesByLeague(arr) {
+	const init = JSON.parse(JSON.stringify(arr));
+
+	return [];
 }
