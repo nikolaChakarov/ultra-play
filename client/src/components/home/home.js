@@ -1,10 +1,10 @@
 import { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../../context/app-state';
 import { styled } from 'styled-components';
+import { sortMatches } from '../../utils/sortMatches';
 
+import League from '../league/league';
 import Spinner from '../spinner/spinner';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
 	const { isLoading, eventsList, searchTerm } = useContext(AppContext);
@@ -12,18 +12,20 @@ const Home = () => {
 	const [events, setEvents] = useState([]);
 
 	const handleEvents = () => {
-		console.log(eventsList);
-		setEvents(eventsList);
+		const sortedByTime = sortMatches(eventsList);
+		setEvents(sortedByTime);
 	};
 
 	const handleSearch = () => {
-		setEvents((prev) =>
+		const sortAndFilter = sortMatches(
 			eventsList.filter((el) =>
 				el.$.Name.toLocaleLowerCase().includes(
 					searchTerm.toLocaleLowerCase()
 				)
 			)
 		);
+
+		setEvents((prev) => sortAndFilter);
 	};
 
 	useEffect(() => {
@@ -39,15 +41,9 @@ const Home = () => {
 	}
 
 	return (
-		<HomeWrapper>
+		<HomeWrapper className='home-wrapper'>
 			<div className='inner'>
-				{events.map((ev, idx) => (
-					<p key={idx}>
-						{ev.$.Name}
-
-						<FontAwesomeIcon icon={faCaretDown} />
-					</p>
-				))}
+				<League events={events} />
 			</div>
 		</HomeWrapper>
 	);

@@ -5,7 +5,7 @@ import { styled } from 'styled-components';
 
 const Header = () => {
 	const [isAbout, setIsAbout] = useState(false);
-	const { dispatch } = useContext(AppContext);
+	const { dispatch, sortType } = useContext(AppContext);
 
 	const handleChange = (e) => {
 		dispatch({
@@ -14,8 +14,15 @@ const Header = () => {
 		});
 	};
 
+	const handleClick = (e) => {
+		dispatch({
+			type: 'SORT_BY',
+			payload: sortType === 'time' ? 'league' : 'time',
+		});
+	};
+
 	return (
-		<HeaderWrapper>
+		<HeaderWrapper className='header-wrapper'>
 			<div className='header-action'>
 				<div className='img-wrapper'>
 					<img src={require('../../images/logo.png')} alt='logo' />
@@ -23,7 +30,9 @@ const Header = () => {
 
 				{!isAbout && (
 					<div className='actions-wrapper'>
-						<button>Sort by</button>
+						<button onClick={handleClick}>
+							Sort by {sortType === 'time' ? 'league' : 'time'}
+						</button>
 						<input
 							type='text'
 							placeholder='Search by League Name'
@@ -78,8 +87,8 @@ const HeaderWrapper = styled.header`
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			gap: 2rem;
 			background: #fff;
+			gap: 0.5rem;
 
 			.img-wrapper {
 				max-width: 5rem;
@@ -97,13 +106,14 @@ const HeaderWrapper = styled.header`
 				background: var(--app-green);
 				color: #fff;
 				font-weight: bold;
-				padding: 1rem 1.5rem;
+				padding: 0.5rem;
 				border-radius: 0.5rem;
 				text-transform: uppercase;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				line-height: 1.2rem;
+				font-size: 1.2rem;
 			}
 
 			.actions-wrapper {

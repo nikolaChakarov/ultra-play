@@ -1,11 +1,13 @@
 import { createContext, useEffect, useReducer } from 'react';
 import appReducer from './app-reducer';
+import { setInputData } from '../utils/setInputData';
 
 const init = {
 	eventsList: [],
 	error: null,
 	isLoading: false,
 	searchTerm: '',
+	sortType: 'time',
 };
 
 export const AppContext = createContext(init);
@@ -28,9 +30,11 @@ export const AppProvider = ({ children }) => {
 				throw new Error('No events to show');
 			}
 
+			const eventWinners = setInputData(events);
+
 			dispatch({
 				type: 'LOAD_DATA',
-				payload: events,
+				payload: eventWinners,
 			});
 		} catch (err) {
 			dispatch({
@@ -52,6 +56,7 @@ export const AppProvider = ({ children }) => {
 				error: state.error,
 				eventsList: state.eventsList,
 				searchTerm: state.searchTerm,
+				sortType: state.sortType,
 				dispatch,
 			}}
 		>

@@ -24,6 +24,11 @@ export default function appReducer(state, action) {
 				...state,
 				searchTerm: action.payload,
 			};
+		case 'SORT_BY':
+			return {
+				...state,
+				sortType: action.payload,
+			};
 
 		default:
 			return state;
