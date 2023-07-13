@@ -56,5 +56,21 @@ export function sortMatchesByTime(arr) {
 export function sortMatchesByLeague(arr) {
 	const init = JSON.parse(JSON.stringify(arr));
 
-	return [];
+	const result = init.reduce((acc, curr) => {
+		const leagueName = curr.$.Name.split(',')[0];
+
+		const league = acc.find((el) => el.leagueName === leagueName);
+		if (!league) {
+			acc.push({
+				leagueName,
+				events: [curr],
+			});
+			return acc;
+		}
+
+		league.events.push(curr);
+		return acc;
+	}, []);
+
+	return result;
 }

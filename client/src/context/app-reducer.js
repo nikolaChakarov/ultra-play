@@ -28,6 +28,12 @@ export default function appReducer(state, action) {
 			return {
 				...state,
 				sortType: action.payload,
+				isLoading: true,
+			};
+		case 'SORT_OFF':
+			return {
+				...state,
+				isLoading: false,
 			};
 
 		default:

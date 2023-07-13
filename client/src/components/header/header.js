@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { AppContext } from '../../context/app-state';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -20,6 +20,12 @@ const Header = () => {
 			payload: sortType === 'time' ? 'league' : 'time',
 		});
 	};
+
+	useEffect(() => {
+		dispatch({
+			type: 'SORT_OFF',
+		});
+	}, [sortType, dispatch]);
 
 	return (
 		<HeaderWrapper className='header-wrapper'>

@@ -42,7 +42,6 @@ const Home = () => {
 
 	useEffect(() => {
 		handleEvents();
-		console.log('effect');
 	}, [sortType, eventsList]);
 
 	if (isLoading) {
