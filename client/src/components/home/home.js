@@ -60,9 +60,7 @@ const Home = () => {
 
 	return (
 		<HomeWrapper className='home-wrapper'>
-			<div className='inner'>
-				<League events={events} />
-			</div>
+			<League events={events} />
 		</HomeWrapper>
 	);
 };
@@ -70,17 +68,10 @@ const Home = () => {
 const HomeWrapper = styled.div`
 	position: relative;
 	flex: 1;
-	overflow: scroll;
+	overflow-y: scroll;
+	scroll-behavior: smooth;
 	display: flex;
 	flex-direction: column;
-
-	.inner {
-		overflow: scroll;
-		scroll-behavior: smooth;
-		display: flex;
-		flex-direction: column;
-		flex: 1;
-	}
 
 	p {
 		padding: 5px;
