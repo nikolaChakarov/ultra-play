@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
 import { useEffect, useState } from 'react';
+import { formatDate } from '../../utils/formatDate';
 
 const Match = ({ match }) => {
 	const { Name, StartDate } = match.$;
@@ -7,15 +8,7 @@ const Match = ({ match }) => {
 
 	const [odds, setOdds] = useState({ w: '', d: '', l: '' });
 
-	const formatedDate = new Date(StartDate).toLocaleDateString('en-US', {
-		day: 'numeric',
-		month: 'short',
-		year: 'numeric',
-	});
-	const formatedTime = new Date(StartDate).toLocaleString('en-US', {
-		hour: 'numeric',
-		minute: 'numeric',
-	});
+	const dateFormated = formatDate(StartDate);
 
 	const init = () => {
 		const odd = Bet[0].Odd;
@@ -38,9 +31,7 @@ const Match = ({ match }) => {
 		<MatchWrapper className='match-wrapper'>
 			<div className='name-date'>
 				<span className='name'>{Name}</span>
-				<span className='date'>
-					{formatedDate} {formatedTime}
-				</span>
+				<span className='date'>{dateFormated}</span>
 			</div>
 			<div className='odds-wrapper'>
 				<span className='win'>{odds.w}</span>
@@ -54,24 +45,31 @@ const Match = ({ match }) => {
 const MatchWrapper = styled.div`
 	display: flex;
 	border-bottom: 2px groove #fff;
+	background: #fff;
 
 	.name-date {
 		flex: 3;
-		/* border: 2px dashed darkblue; */
+		display: flex;
+		flex-direction: column;
 		padding: 0.8rem;
+
+		.date {
+			font-weight: bold;
+		}
 	}
 
 	.odds-wrapper {
 		flex: 2;
 		display: flex;
-		/* border: 2px dashed red; */
 
 		span {
 			padding: 0.8rem;
 			flex: 1;
-			text-align: center;
-			word-break: keep-all;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			border-left: 2px groove #fff;
+			color: #777;
 		}
 	}
 `;

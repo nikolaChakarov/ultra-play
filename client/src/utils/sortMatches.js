@@ -57,7 +57,7 @@ export function sortMatchesByLeague(arr) {
 	const init = JSON.parse(JSON.stringify(arr));
 
 	const result = init.reduce((acc, curr) => {
-		const leagueName = curr.$.Name.split(',')[0];
+		const leagueName = curr?.$?.Name.split(',')[0];
 
 		const league = acc.find((el) => el.leagueName === leagueName);
 		if (!league) {

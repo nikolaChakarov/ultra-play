@@ -30,6 +30,11 @@ export default function appReducer(state, action) {
 				sortType: action.payload,
 				isLoading: true,
 			};
+		case 'RESET_SORT_BY':
+			return {
+				...state,
+				sortType: 'time',
+			};
 		case 'SORT_OFF':
 			return {
 				...state,

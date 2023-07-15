@@ -22,7 +22,6 @@ function App() {
 const AppWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	border: 2px dashed;
 	height: 100vh;
 `;
 

@@ -66,7 +66,6 @@ const Header = () => {
 
 const HeaderWrapper = styled.header`
 	@media (max-width: 576px) {
-		border: 2px dashed;
 		display: flex;
 		flex-direction: column-reverse;
 		background: var(--app-blue);

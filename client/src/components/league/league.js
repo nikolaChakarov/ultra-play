@@ -19,6 +19,10 @@ const League = ({ events }) => {
 	);
 };
 
-const LeagueWrapper = styled.div``;
+const LeagueWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+`;
 
 export default League;

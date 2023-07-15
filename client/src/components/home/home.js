@@ -14,26 +14,36 @@ const Home = () => {
 		useContext(AppContext);
 
 	const [events, setEvents] = useState([]);
+	const [sortedByTypeNames, setSortedByTypeNames] = useState([]);
 
 	const handleEvents = () => {
-		const sorted =
-			sortType === 'time'
-				? sortMatchesByTime(eventsList)
-				: sortMatchesByLeague(eventsList);
+		let sorted = [];
 
+		if (sortType === 'time') {
+			sorted = sortMatchesByTime(eventsList);
+		} else if (sortType === 'league') {
+			sorted = sortMatchesByLeague(eventsList);
+			setSortedByTypeNames(sorted);
+		}
 		setEvents(sorted);
 	};
 
 	const handleSearch = () => {
-		const sortAndFilter = sortMatchesByTime(
-			eventsList.filter((el) =>
-				el.$.Name.toLocaleLowerCase().includes(
-					searchTerm.toLocaleLowerCase()
-				)
-			)
-		);
-
-		setEvents((prev) => sortAndFilter);
+		const sortAndFilter =
+			sortType === 'time'
+				? sortMatchesByTime(
+						eventsList.filter((el) =>
+							el.$.Name.toLocaleLowerCase().includes(
+								searchTerm.toLocaleLowerCase()
+							)
+						)
+				  )
+				: sortedByTypeNames.filter((el) =>
+						el.leagueName
+							.toLocaleLowerCase()
+							.includes(searchTerm.toLocaleLowerCase())
+				  );
+		setEvents(sortAndFilter);
 	};
 
 	useEffect(() => {
@@ -65,14 +75,15 @@ const HomeWrapper = styled.div`
 	flex-direction: column;
 
 	.inner {
-		border: 2px dashed red;
 		overflow: scroll;
 		scroll-behavior: smooth;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
 	}
 
 	p {
 		padding: 5px;
-		border: dashed 1px green;
 	}
 `;
 

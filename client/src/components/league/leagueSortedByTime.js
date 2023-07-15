@@ -39,17 +39,13 @@ const LeagueSortedByTimeWrapper = styled.div`
 		display: flex;
 		border-bottom: 2px groove #fff;
 
-		/* border: 2px dashed red; */
-
 		.league-name {
 			padding: 0.8rem;
 			flex: 3;
-			/* border: 2px dashed lightsalmon; */
 		}
 
 		.odds {
 			flex: 2;
-			/* border: 2px dashed green; */
 			display: flex;
 			align-items: center;
 
