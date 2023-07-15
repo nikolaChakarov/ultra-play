@@ -9,3 +9,5 @@ to run the project:
 1. server/npm install
 2. client/npm install
 3. start; start; have fun!
+
+there is MOBILE and DESKTOP layout
